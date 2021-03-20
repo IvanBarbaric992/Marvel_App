@@ -1,0 +1,28 @@
+@import "styles/globals/variables";
+
+.header {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    position: relative;
+    background-color: $header-color;
+
+    & .logo {
+        width: 30%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 180px;
+        text-align: center;
+        z-index: 100;
+        overflow: auto;
+    }
+}
+
+.title {
+    color: purple;
+}

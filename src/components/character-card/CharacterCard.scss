@@ -1,0 +1,41 @@
+.card {
+    display: flex;
+    align-items: flex-end;
+    min-height: 180px;
+    border: 0;
+    flex-grow: 1;
+    position: relative;
+    background-position: center center;
+    background-size: cover;
+    overflow: hidden;
+    border-radius: 4px;
+    transition: all .400s ease;
+    transform: perspective(500px) translateZ(1px);
+    z-index: 1;
+
+    &:focus {
+        outline: none,
+    }
+
+    &:hover {
+        z-index: 9;
+        transform: perspective(500px) translateZ(20px)
+        }
+
+   
+}
+
+.bookmark-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+ & .feather.feather-bookmark {
+     cursor: pointer;
+    &:hover {
+        fill: red;
+    }
+} }
