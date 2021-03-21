@@ -1,11 +1,18 @@
 import React from "react";
 
-import SearchInput from "./SearchInput";
+import "./Search.scss";
 
 const SearchBox = ({ onChange }) => {
   return (
     <form className="search" autoComplete="off">
-      <SearchInput onChange={onChange} />
+      <input
+        name="search"
+        type="text"
+        aria-label="search input"
+        className="search__input"
+        placeholder="Search characters"
+        onChange={onChange}
+      />
     </form>
   );
 };

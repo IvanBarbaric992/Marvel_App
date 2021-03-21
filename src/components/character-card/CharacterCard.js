@@ -12,7 +12,7 @@ const CharacterCard = ({
   const imageUrl = `${character?.thumbnail?.path}/${imageSize}.${character?.thumbnail?.extension}`;
   return (
     <div className="card" style={{ backgroundImage: `url(${imageUrl})` }}>
-      <h4>{character?.name}</h4>
+      <h4 className="card__title">{character?.name}</h4>
       <button
         className="bookmark-button"
         onClick={() => onBookmarkClick(character)}

@@ -7,3 +7,18 @@ $grey-200: #fafafa;
 
 
 $primary-font-family: "Lucida Console", "Courier New", monospace;
+$header-font-family: "sans-serif";
+
+
+//grid
+
+$grid-min-size: 20rem;
+
+// Breakpoints and sizes
+$breakpoints: (xs: 375px,
+    sm: 640px,
+    md: 768px,
+    lg: 1024px,
+    xl: 1280px,
+);
+$max-width: map-get($breakpoints, 'xl');

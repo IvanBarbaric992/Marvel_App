@@ -4,8 +4,8 @@ const MarvelLogo = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="200"
-      height="70"
+      width="100"
+      height="50"
       viewBox="0 0 500 200"
     >
       <path fill="#f0141e" d="M0 0h500v200H0z" />

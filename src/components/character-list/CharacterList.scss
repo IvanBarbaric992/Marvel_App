@@ -1,7 +1,18 @@
+@import "styles/globals/variables";
+@import "styles/mixins/breakpoints";
+
 .cards {
-    max-width: 1200px;
-    margin: 2rem auto;
+    height: 95%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax($grid-min-size, 1fr));
+    gap: 0.95rem;
+    margin: 0.75rem;
+
+    @include media('md') {
+        height: 90%;
+    }
+
+    @include media('lg') {
+        height: 85%;
+    }
 }

@@ -6,10 +6,12 @@ import MarvelLogo from "./MarvelLogo";
 const Header = () => {
   return (
     <header className="header">
-      <div className="logo">
+      <div className="header__logo">
         <MarvelLogo />
       </div>
-      <h1 className="title">{process.env.REACT_APP_NAME}</h1>
+      <h1 className="header__title">
+        Search and bookmark your favourite marvel characters
+      </h1>
     </header>
   );
 };

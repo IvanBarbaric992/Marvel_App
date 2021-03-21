@@ -8,9 +8,11 @@
 }
 
 body {
-    height: 100vh;
-    padding:10px;
-    padding-bottom:100px;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    line-height: 1;
+    overflow-x: hidden;
     font-family: $primary-font-family;
     background: #DC2424;
     background: -webkit-linear-gradient(to left, #bc4040, #5c6dd6);

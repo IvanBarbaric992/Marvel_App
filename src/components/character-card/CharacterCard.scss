@@ -1,17 +1,22 @@
 .card {
     display: flex;
     align-items: flex-end;
-    min-height: 180px;
+    min-height: 8rem;
     border: 0;
     flex-grow: 1;
     position: relative;
-    background-position: center center;
-    background-size: cover;
+    background-repeat:no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+    background-position:center;
     overflow: hidden;
     border-radius: 4px;
     transition: all .400s ease;
     transform: perspective(500px) translateZ(1px);
     z-index: 1;
+
 
     &:focus {
         outline: none,
@@ -21,7 +26,9 @@
         z-index: 9;
         transform: perspective(500px) translateZ(20px)
         }
-
+        .card__title {
+            color: white;
+        }
    
 }
 

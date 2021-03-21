@@ -89,7 +89,7 @@ const MarvelCharacters = () => {
   };
 
   return (
-    <div className="container">
+    <>
       <SearchBox onChange={handleSearchBoxChange} />
       <CharacterList
         characters={data.characters}
@@ -102,7 +102,7 @@ const MarvelCharacters = () => {
           onPageChange={onPageChange}
         />
       ) : null}
-    </div>
+    </>
   );
 };
 
