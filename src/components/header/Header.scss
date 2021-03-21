@@ -1,4 +1,5 @@
 @import "styles/globals/variables";
+@import 'styles/mixins/breakpoints.scss';
 
 .header {
     width: 100%;
@@ -21,5 +22,13 @@
         font-family: $header-font-family;
         padding: 0.5rem;
         line-height: 1.5;
+
+         @include media('md') {
+             font-size: 1rem;
+         }
+
+         @include media('lg') {
+             font-size: 1.5rem;
+         }
     }
 }

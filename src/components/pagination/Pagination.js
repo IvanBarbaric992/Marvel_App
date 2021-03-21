@@ -6,7 +6,7 @@ import { MOVE_LEFT, MOVE_RIGHT } from "constants/pagination";
 
 import "./Pagination.scss";
 
-const Pagination = ({ numberOfRecords, pageSize, onPageChange }) => {
+const PaginationComponent = ({ numberOfRecords, pageSize, onPageChange }) => {
   const {
     pages,
     currentPage,
@@ -21,14 +21,14 @@ const Pagination = ({ numberOfRecords, pageSize, onPageChange }) => {
   });
 
   return (
-    <nav className="pagination-navbar-container">
-      <ul className="pagination">
+    <nav className="pagination">
+      <ul className="pagination__list">
         {pages.map((page, index) => {
           if (page === MOVE_LEFT)
             return (
-              <li key={index} className="page-item">
+              <li key={index} className="pagination__list__page--item">
                 <button
-                  className="page-link"
+                  className="pagination__list__page--link"
                   aria-label="Previous"
                   onClick={handleMoveLeft}
                 >
@@ -40,9 +40,9 @@ const Pagination = ({ numberOfRecords, pageSize, onPageChange }) => {
 
           if (page === MOVE_RIGHT)
             return (
-              <li key={index} className="page-item">
+              <li key={index} className="pagination__list__page--item">
                 <button
-                  className="page-link"
+                  className="pagination__list__page--link"
                   aria-label="Next"
                   onClick={handleMoveRight}
                 >
@@ -55,10 +55,13 @@ const Pagination = ({ numberOfRecords, pageSize, onPageChange }) => {
           return (
             <li
               key={index}
-              className={`page-item${page === currentPage ? " active" : ""}`}
+              className={`pagination__list__page--item${
+                page === currentPage ? " active" : ""
+              }`}
             >
               <button
-                className="page-link"
+                disabled={page === currentPage}
+                className="pagination__list__page--link"
                 href="#"
                 value={page}
                 onClick={e => handlePageChange(e, page)}
@@ -73,4 +76,4 @@ const Pagination = ({ numberOfRecords, pageSize, onPageChange }) => {
   );
 };
 
-export default Pagination;
+export default PaginationComponent;

@@ -22,16 +22,22 @@
         -moz-box-shadow: 4px 4px 4px black;
         box-shadow: 4px 4px 4px black;
         text-shadow: -1px -1px 2px black;
+
+        @include media('md') {
+            font-size: 1rem;
+        }
+
+        @include media('lg') {
+            font-size: 1rem;
+        }
         
     }
     @include media('md') {
         height: 2rem;
-        font-size: 1.6rem;
     }
 
     @include media('lg') {
-        height: 2rem;
-        font-size: 1.6rem;
+        height: 3rem;
     }
 
     
