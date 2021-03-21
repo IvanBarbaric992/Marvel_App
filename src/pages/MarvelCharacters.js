@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import CharacterList from "components/character-list";
-import SearchBox from "components/search";
-import fetchMarvelCharactersFromApi from "services/api/fetchMarvelCharacters";
-import PaginationComponent from "components/pagination";
+import { CharacterList, Pagination, SearchBox } from "components";
 
-import { removeKey } from "services/utilities/removeKeyFromObject";
+import fetchMarvelCharactersFromApi from "services/api/fetchMarvelCharacters";
 import {
   getItemFromStorage,
   setItemToStorage
 } from "services/utilities/storage";
+
+import { removeKey } from "services/utilities/removeKeyFromObject";
 
 const MarvelCharacters = () => {
   const [data, setData] = useState({ characters: [], totalRecords: 0 });
@@ -96,7 +95,7 @@ const MarvelCharacters = () => {
         onBookmarkClick={onBookmarkClick}
       />
       {data.totalRecords > 20 ? (
-        <PaginationComponent
+        <Pagination
           numberOfRecords={data.totalRecords}
           pageSize={20}
           onPageChange={onPageChange}

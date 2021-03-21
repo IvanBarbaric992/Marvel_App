@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Search.scss";
+import "./SearchBox.scss";
 
 const SearchBox = ({ onChange }) => {
   return (

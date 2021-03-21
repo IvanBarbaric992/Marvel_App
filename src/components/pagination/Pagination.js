@@ -4,9 +4,9 @@ import usePagination from "hooks/usePagination";
 
 import { MOVE_LEFT, MOVE_RIGHT } from "constants/pagination";
 
-import "./PaginationComponent.scss";
+import "./Pagination.scss";
 
-const PaginationComponent = ({ numberOfRecords, pageSize, onPageChange }) => {
+const Pagination = ({ numberOfRecords, pageSize, onPageChange }) => {
   const {
     pages,
     currentPage,
@@ -19,7 +19,6 @@ const PaginationComponent = ({ numberOfRecords, pageSize, onPageChange }) => {
     surroundingPages: 1,
     onPageChange
   });
-  
 
   return (
     <nav className="pagination-navbar-container">
@@ -74,4 +73,4 @@ const PaginationComponent = ({ numberOfRecords, pageSize, onPageChange }) => {
   );
 };
 
-export default PaginationComponent;
+export default Pagination;

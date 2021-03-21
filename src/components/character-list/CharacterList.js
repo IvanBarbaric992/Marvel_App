@@ -1,6 +1,6 @@
 import React from "react";
 
-import CharacterCard from "components/character-card";
+import { CharacterCard } from "components";
 
 import "./CharacterList.scss";
 
