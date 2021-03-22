@@ -40,6 +40,12 @@ const fetchMarvelCharactersFromApi = async ({
     }
   });
 
+  if (!charactersFromApi.data) {
+    return {
+      error: charactersFromApi.message
+    };
+  }
+
   const recordsCount = charactersFromApi?.data?.total;
 
   const characters = charactersFromApi?.data?.results?.reduce((result, obj) => {

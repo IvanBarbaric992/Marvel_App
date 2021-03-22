@@ -5,3 +5,4 @@ export { default as Header } from "components/header/Header";
 export { default as Layout } from "components/layout/Layout";
 export { default as SearchBox } from "components/search/SearchBox";
 export { default as Pagination } from "components/pagination/Pagination";
+export { default as Loader } from "components/loader/Loader";

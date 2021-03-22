@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { CharacterList, Pagination, SearchBox } from "components";
+import { CharacterList, Loader, Pagination, SearchBox } from "components";
 
 import fetchMarvelCharactersFromApi from "services/api/fetchMarvelCharacters";
 import {
@@ -12,7 +12,9 @@ import { removeKey } from "services/utilities/removeKeyFromObject";
 
 const MarvelCharacters = () => {
   const [data, setData] = useState({ characters: [], totalRecords: 0 });
+  const [isLoading, setIsLoading] = useState(false);
   const [searchField, setSearchField] = useState("");
+  const [error, setError] = useState("");
   const [bookmarkedCharacters, setBookmarkedCharacters] = useState(() => {
     return (
       getItemFromStorage({ key: process.env.REACT_APP_LOCAL_STORAGE_KEY }) || {}
@@ -28,14 +30,20 @@ const MarvelCharacters = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (!!searchField && !isBookmarkToggled.current) {
-        console.log("fetch");
-        const { characters, recordsCount } = await fetchMarvelCharactersFromApi(
-          {
-            limit: pageData.limit,
-            offset: pageData.offset,
-            searchField
-          }
-        );
+        const {
+          characters,
+          recordsCount,
+          error
+        } = await fetchMarvelCharactersFromApi({
+          limit: pageData.limit,
+          offset: pageData.offset,
+          searchField
+        });
+
+        if (error) {
+          setError(error);
+        }
+
         dataFromApi.current.characters = characters;
         dataFromApi.current.totalRecords = recordsCount;
       } else if (!searchField) {
@@ -46,13 +54,16 @@ const MarvelCharacters = () => {
           bookmarkedCharacters
         ).length;
       }
+
       setData({
-        characters: dataFromApi.current.characters.map(character => ({
+        characters: dataFromApi.current.characters?.map(character => ({
           ...character,
           isBookmarked: !!bookmarkedCharacters[character.id]
         })),
         totalRecords: dataFromApi.current.totalRecords
       });
+
+      setIsLoading(false);
     };
 
     fetchData();
@@ -68,9 +79,11 @@ const MarvelCharacters = () => {
   const handleSearchBoxChange = e => {
     e.preventDefault();
     setSearchField(e.target.value);
+    setIsLoading(true);
   };
   const onPageChange = pageData => {
     setPageData(prevState => ({ ...prevState, ...pageData }));
+    setIsLoading(true);
   };
 
   const onBookmarkClick = character => {
@@ -87,20 +100,29 @@ const MarvelCharacters = () => {
     isBookmarkToggled.current = true;
   };
 
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <>
       <SearchBox onChange={handleSearchBoxChange} />
-      <CharacterList
-        characters={data.characters}
-        onBookmarkClick={onBookmarkClick}
-      />
-      {data.totalRecords > 20 ? (
-        <Pagination
-          numberOfRecords={data.totalRecords}
-          pageSize={20}
-          onPageChange={onPageChange}
-        />
-      ) : null}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <CharacterList
+            characters={data.characters}
+            onBookmarkClick={onBookmarkClick}
+          />
+          {data.totalRecords > 20 ? (
+            <Pagination
+              numberOfRecords={data.totalRecords}
+              pageSize={20}
+              onPageChange={onPageChange}
+            />
+          ) : null}
+        </>
+      )}
     </>
   );
 };
