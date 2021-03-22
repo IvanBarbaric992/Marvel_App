@@ -18,6 +18,8 @@ Marvel character catalog is a simple app demo where users can search and bookmar
 
 ![Mobile Demo](./public/mobile_demo.png)
 
+---
+
 ## How to use
 
 ### Prerequisites
