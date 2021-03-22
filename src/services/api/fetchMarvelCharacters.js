@@ -1,3 +1,5 @@
+import CryptoJS from "crypto-js";
+
 const fetchApi = async ({
   method = "get",
   baseUrl = "",
@@ -26,12 +28,19 @@ const fetchMarvelCharactersFromApi = async ({
   offset = 0,
   searchField = ""
 }) => {
+  const unixTimestamp = Math.floor(new Date().getTime() / 1000).toString();
+  const hash = CryptoJS.MD5(
+    unixTimestamp +
+      process.env.REACT_APP_MARVEL_API_PRIVATE_KEY +
+      process.env.REACT_APP_MARVEL_API_PUBLIC_KEY
+  ).toString(CryptoJS.enc.Hex);
+
   const charactersFromApi = await fetchApi({
     baseUrl: process.env.REACT_APP_MARVEL_API_ENDPOINT,
     params: {
-      ts: 1,
+      ts: unixTimestamp,
       apikey: process.env.REACT_APP_MARVEL_API_PUBLIC_KEY,
-      hash: process.env.REACT_APP_MARVEL_API_HASH,
+      hash,
       limit,
       offset
     },

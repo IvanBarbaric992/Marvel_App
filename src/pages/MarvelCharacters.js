@@ -16,9 +16,7 @@ const MarvelCharacters = () => {
   const [searchField, setSearchField] = useState("");
   const [error, setError] = useState("");
   const [bookmarkedCharacters, setBookmarkedCharacters] = useState(() => {
-    return (
-      getItemFromStorage({ key: process.env.REACT_APP_LOCAL_STORAGE_KEY }) || {}
-    );
+    return getItemFromStorage({ key: "@bookmark" }) || {};
   });
   const dataFromApi = useRef({ characters: [], totalRecords: 0 });
   const [pageData, setPageData] = useState({
@@ -70,7 +68,7 @@ const MarvelCharacters = () => {
 
     if (isBookmarkToggled.current) {
       setItemToStorage({
-        key: process.env.REACT_APP_LOCAL_STORAGE_KEY,
+        key: "@bookmark",
         value: bookmarkedCharacters
       });
       isBookmarkToggled.current = false;
