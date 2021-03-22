@@ -8,15 +8,15 @@ Marvel character catalog is a simple app demo where users can search and bookmar
 
 ### Desktop
 
-![Desktop demo](/public/desktop_demo.png)
+![Desktop demo](./public/desktop_demo.png)
 
 ### Tablet
 
-![Tablet demo](/public/tablet_demo.png)
+![Tablet demo](./public/tablet_demo.png)
 
 ### Mobile
 
-![Mobile Demo](/public/mobile_demo.png)
+![Mobile Demo](./public/mobile_demo.png)
 
 ---
 
