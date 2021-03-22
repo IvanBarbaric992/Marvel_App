@@ -11,7 +11,7 @@ const Footer = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Powered by Blank
+        Powered by Marvel
       </a>
     </footer>
   );
