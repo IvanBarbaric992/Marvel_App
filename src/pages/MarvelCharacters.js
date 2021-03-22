@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { CharacterList, Loader, Pagination, SearchBox } from "components";
 
+import useDebounce from "hooks/useDebounce";
 import fetchMarvelCharactersFromApi from "services/api/fetchMarvelCharacters";
+
 import {
   getItemFromStorage,
   setItemToStorage
 } from "services/utilities/storage";
-
 import { removeKey } from "services/utilities/removeKeyFromObject";
 
 const MarvelCharacters = () => {
@@ -25,46 +26,50 @@ const MarvelCharacters = () => {
   });
   const isBookmarkToggled = useRef(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (!!searchField && !isBookmarkToggled.current) {
-        const {
-          characters,
-          recordsCount,
-          error
-        } = await fetchMarvelCharactersFromApi({
-          limit: pageData.limit,
-          offset: pageData.offset,
-          searchField
-        });
-
-        if (error) {
-          setError(error);
-        }
-
-        dataFromApi.current.characters = characters;
-        dataFromApi.current.totalRecords = recordsCount;
-      } else if (!searchField) {
-        dataFromApi.current.characters = Object.keys(bookmarkedCharacters).map(
-          bookmarkId => bookmarkedCharacters[bookmarkId]
-        );
-        dataFromApi.current.totalRecords = Object.keys(
-          bookmarkedCharacters
-        ).length;
-      }
-
-      setData({
-        characters: dataFromApi.current.characters?.map(character => ({
-          ...character,
-          isBookmarked: !!bookmarkedCharacters[character.id]
-        })),
-        totalRecords: dataFromApi.current.totalRecords
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    if (!!searchField) {
+      setIsLoading(true);
+      console.log("fetching characters");
+      const {
+        characters,
+        recordsCount,
+        error
+      } = await fetchMarvelCharactersFromApi({
+        limit: pageData.limit,
+        offset: pageData.offset,
+        searchField
       });
 
-      setIsLoading(false);
-    };
+      if (error) {
+        setError(error);
+        return;
+      }
 
-    fetchData();
+      dataFromApi.current.characters = characters;
+      dataFromApi.current.totalRecords = recordsCount;
+    }
+
+    setIsLoading(false);
+  }, [pageData, searchField]);
+
+  useEffect(() => {
+    if (!searchField) {
+      dataFromApi.current.characters = Object.keys(bookmarkedCharacters).map(
+        bookmarkId => bookmarkedCharacters[bookmarkId]
+      );
+      dataFromApi.current.totalRecords = Object.keys(
+        bookmarkedCharacters
+      ).length;
+    }
+
+    setData({
+      characters: dataFromApi.current.characters?.map(character => ({
+        ...character,
+        isBookmarked: !!bookmarkedCharacters[character.id]
+      })),
+      totalRecords: dataFromApi.current.totalRecords
+    });
 
     if (isBookmarkToggled.current) {
       setItemToStorage({
@@ -73,11 +78,13 @@ const MarvelCharacters = () => {
       });
       isBookmarkToggled.current = false;
     }
-  }, [pageData, searchField, bookmarkedCharacters]);
+  }, [searchField, bookmarkedCharacters, isLoading]);
+
+  useDebounce({ callback: fetchData, value: searchField, debounceDelay: 1000 });
+
   const handleSearchBoxChange = e => {
     e.preventDefault();
     setSearchField(e.target.value);
-    setIsLoading(true);
   };
   const onPageChange = pageData => {
     setPageData(prevState => ({ ...prevState, ...pageData }));
