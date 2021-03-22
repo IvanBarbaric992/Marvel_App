@@ -15,9 +15,9 @@ ul.pagination__list li.pagination__list__page--item button.pagination__list__pag
 }
 
 ul.pagination__list li.pagination__list__page--item.active button.pagination__list__page--link {
-    color: #445565 !important;
-    background-color: #e3e7eb !important;
-    border-color: #ced4da !important;
+    color: #445565;
+    background-color: #e3e7eb;
+    border-color: #ced4da;
     cursor: auto;
 }
 
@@ -25,8 +25,8 @@ ul.pagination__list button.pagination__list__page--link {
     padding: 0.75rem 1rem;
     min-width: 3.5rem;
     text-align: center;
-    box-shadow: none !important;
-    border-color: #ced4da !important;
+    box-shadow: none;
+    border-color: #ced4da;
     color: #6b88a4;
     font-weight: 900;
     font-size: 1rem;

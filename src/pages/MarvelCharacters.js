@@ -119,15 +119,15 @@ const MarvelCharacters = () => {
             characters={data.characters}
             onBookmarkClick={onBookmarkClick}
           />
-          {data.totalRecords > 20 ? (
-            <Pagination
-              numberOfRecords={data.totalRecords}
-              pageSize={20}
-              onPageChange={onPageChange}
-            />
-          ) : null}
         </>
       )}
+      {data.totalRecords > 20 ? (
+        <Pagination
+          numberOfRecords={data.totalRecords}
+          pageSize={20}
+          onPageChange={onPageChange}
+        />
+      ) : null}
     </>
   );
 };
