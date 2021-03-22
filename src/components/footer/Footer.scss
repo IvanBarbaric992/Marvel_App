@@ -10,7 +10,8 @@
     border-top-width: 1rem;
     border-color: $grey-100;
     background-color: $footer-color;
-    margin-top: auto;
+    position: absolute;
+    bottom: 0;
 
     .footer__link {color: $grey-200;}
 }

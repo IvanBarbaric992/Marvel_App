@@ -6,17 +6,26 @@
         outline: none;
     }
 }
+html {
+     width: 100%;
+     height: 100%;
+}
 
 body {
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    line-height: 1;
+    width: 100%;
+    min-height: 100%;
+    padding-bottom: 1rem;
+    position: relative;
+    padding-bottom: 2.5rem;
     overflow-x: hidden;
     font-family: $primary-font-family;
     background: #DC2424;
     background: -webkit-linear-gradient(to left, #bc4040, #5c6dd6);
     background: linear-gradient(to left, #bc4040, #5c6dd6);
+}
+
+#root {
+    height: 100%;
 }
 
 img,

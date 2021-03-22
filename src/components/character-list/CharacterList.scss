@@ -2,9 +2,10 @@
 @import "styles/mixins/breakpoints";
 
 .cards {
-    height: 95%;
+    min-height: 95%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax($grid-min-size, 1fr));
+    grid-template-rows: max-content;
     gap: 0.95rem;
     margin: 0.75rem;
 
