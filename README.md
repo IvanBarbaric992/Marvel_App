@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+# Marvel characters catalog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Marvel character catalog is a simple app demo where users can search and bookmark their favourite characters.
 
-In the project directory, you can run:
+## Demo
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to use
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+First, make sure you have `Node.js` (**npm** or **yarn**) installed.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+$ node -v
+v12.x.x
+```
 
-### `npm run build`
+Also, you can use `nvm` as a helpful tool to install the correct **node** and **npm**/**yarn** version.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Sign up to Marvel API developer portal
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Before installing the application sign up to [MarveL Developer portal](https://developer.marvel.com/) where you will get your PUBLIC and PRIVATE KEY for accessing this api.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installing the application
 
-### `npm run eject`
+```
+$ git clone https://github.com/IvanBarbaric992/Blank_Task_Marvel_App.git <my-project-name>
+$ cd <my-project-name>
+$ npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+_These commands will install all of the latest dependencies. Installation might take some time._
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Set up environment variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Copy the `.env.local.example` file in this directory to `.env.local` (_which will be ignored by Git_):
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+cp .env.local.example .env.local
+```
 
-## Learn More
+Then open `.env.local` and set `REACT_APP_MARVEL_API_ENDPOINT`, `REACT_APP_MARVEL_API_PUBLIC_KEY`, and `REACT_APP_MARVEL_API_PRIVATE_KEY` to match your Marvel API data provided to you.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Your `.env.local` file should look like this:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+SASS_PATH=node_modules:src  ---> Scss absolute paths
 
-### Code Splitting
+REACT_APP_MARVEL_API_ENDPOINT = http://gateway.marvel.com/v1/public/characters
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+REACT_APP_MARVEL_API_PUBLIC_KEY = <your-marvel-api-public-key>
+REACT_APP_MARVEL_API_PRIVATE_KEY = <your-marvel-api-private-key>
+```
 
-### Analyzing the Bundle Size
+### Running the application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+$ npm start
+```
 
-### Making a Progressive Web App
+_Runs the app in the development mode. React will automatically open new browser tab or if not than open [http://localhost:3000](http://localhost:3000) to view it in the browser._
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Building the application
 
-### Advanced Configuration
+```
+$ npm build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+_Builds the application for production usage._
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Built with
 
-### `npm run build` fails to minify
+- [Create React App](https://github.com/facebook/create-react-app)
+- [Sass](https://github.com/sass/dart-sass) as CSS pre-processor
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Libraries
+
+In addition several smaller libraries are used. Instructions on how to use them are linked below.
+
+| Library                                             | Purpose                                                         |
+| --------------------------------------------------- | --------------------------------------------------------------- |
+| [Crypto](https://github.com/brix/crypto-js)         | for MD5 encription which is required by Marvl API authorization |
+| [ESLint](https://github.com/eslint/eslint)          | for making code more consistent and avoiding bugs               |
+| [Stylelint](https://github.com/stylelint/stylelint) | for avoiding errors and enforcing conventions in styles         |
+| [Prettier](https://github.com/prettier/prettier)    | for code formatting                                             |
+| [Husky](https://github.com/typicode/husky)          | for preventing bad commit or push                               |
+
+See `package.json` for a complete overview.
+
+---
+
+## Folder structure
+
+```
+├── public
+├── src
+│   └── components
+│   │   └── {ComponentName}
+│   │        ├── {ComponentName}.scss
+│   │        └── {ComponentName}.js
+│   ├── constants
+│   │   └── {ConstantName}.js
+│   ├── hooks
+│   │   └── use{HookName}.js
+│   ├── pages
+│   │   └── {PageName}.js
+│   ├── services
+│   │   ├── api
+│   │   │    └── {NameOfApiService}.js
+│   │   └── utilities
+│   │   │    └── {NAmeOfFunction}.js
+│   ├── styles
+│   │    ├── globals
+│   │    ├── mixins
+│   │    └── index.scss
+│   ├── App.js
+│   └── index.js
+```
