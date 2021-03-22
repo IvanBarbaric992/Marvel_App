@@ -14,6 +14,7 @@ const CharacterCard = ({
     <div className="card" style={{ backgroundImage: `url(${imageUrl})` }}>
       <h4 className="card__title">{character?.name}</h4>
       <button
+        title={isBookmarked ? "Remove from bookmark" : "Add to bookmark"}
         className="card__bookmark--button"
         onClick={() => onBookmarkClick(character)}
       >
