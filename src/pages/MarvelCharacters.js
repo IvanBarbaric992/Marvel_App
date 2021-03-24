@@ -27,10 +27,7 @@ const MarvelCharacters = () => {
   const isBookmarkToggled = useRef(false);
 
   const fetchData = useCallback(async () => {
-    setIsLoading(true);
     if (!!searchField) {
-      setIsLoading(true);
-      console.log("fetching characters");
       const {
         characters,
         recordsCount,
@@ -49,7 +46,6 @@ const MarvelCharacters = () => {
       dataFromApi.current.characters = characters;
       dataFromApi.current.totalRecords = recordsCount;
     }
-
     setIsLoading(false);
   }, [pageData, searchField]);
 
@@ -62,14 +58,15 @@ const MarvelCharacters = () => {
         bookmarkedCharacters
       ).length;
     }
-
-    setData({
-      characters: dataFromApi.current.characters?.map(character => ({
-        ...character,
-        isBookmarked: !!bookmarkedCharacters[character.id]
-      })),
-      totalRecords: dataFromApi.current.totalRecords
-    });
+    if (!isLoading) {
+      setData({
+        characters: dataFromApi.current.characters?.map(character => ({
+          ...character,
+          isBookmarked: !!bookmarkedCharacters[character.id]
+        })),
+        totalRecords: dataFromApi.current.totalRecords
+      });
+    }
 
     if (isBookmarkToggled.current) {
       setItemToStorage({
@@ -85,6 +82,7 @@ const MarvelCharacters = () => {
   const handleSearchBoxChange = e => {
     e.preventDefault();
     setSearchField(e.target.value);
+    setIsLoading(true);
   };
   const onPageChange = pageData => {
     setPageData(prevState => ({ ...prevState, ...pageData }));
