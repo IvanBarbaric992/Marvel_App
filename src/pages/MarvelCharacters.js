@@ -45,8 +45,9 @@ const MarvelCharacters = () => {
 
       dataFromApi.current.characters = characters;
       dataFromApi.current.totalRecords = recordsCount;
+
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, [pageData, searchField]);
 
   useEffect(() => {
@@ -80,12 +81,14 @@ const MarvelCharacters = () => {
   useDebounce({ callback: fetchData, value: searchField, debounceDelay: 1000 });
 
   const handleSearchBoxChange = e => {
-    e.preventDefault();
+    const { value } = e.target;
     setSearchField(e.target.value);
-    setIsLoading(true);
+    if (!!value) {
+      setIsLoading(true);
+    }
   };
   const onPageChange = pageData => {
-    setPageData(prevState => ({ ...prevState, ...pageData }));
+    setPageData({ ...pageData });
     setIsLoading(true);
   };
 
