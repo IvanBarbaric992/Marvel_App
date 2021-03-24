@@ -16,6 +16,10 @@ export const setItemToStorage = ({ key, value }) => {
   } catch (error) {
     return undefined;
   }
+
+  if (Object.keys(value).length === 0) {
+    removeItemFromStorage({ key });
+  }
 };
 
 export const removeItemFromStorage = ({ key }) => {
