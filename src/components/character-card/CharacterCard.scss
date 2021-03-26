@@ -1,53 +1,81 @@
 .card {
-    display: flex;
-    align-items: flex-end;
-    min-height: 8rem;
-    min-height: 12rem;
-    border: 0;
-    flex-grow: 1;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover;
-    background-position:center;
-    overflow: hidden;
-    border-radius: 4px;
-    transition: all .400s ease;
-    transform: perspective(500px) translateZ(1px);
-    z-index: 1;
-    padding: 0.5rem;
+  display: flex;
+  align-items: flex-end;
+  min-height: 8rem;
+  min-height: 12rem;
+  border: 0;
+  flex-grow: 1;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  border-radius: 4px;
+  transition: all 0.4s ease;
+  transform: perspective(500px) translateZ(1px);
+  z-index: 1;
+  padding: 0.5rem;
 
+  &:focus {
+    outline: none;
+  }
 
-    &:focus {
-        outline: none,
+  &:hover {
+    z-index: 9;
+    transform: perspective(500px) translateZ(20px);
+  }
+  .card__title {
+    color: white;
+    text-shadow: 0 1px 0 black;
+  }
+
+  .card__bookmark--button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    .card__feather--bookmark {
+      cursor: pointer;
+
+      &:hover {
+        fill: red;
+      }
     }
+  }
 
-    &:hover {
-        z-index: 9;
-        transform: perspective(500px) translateZ(20px)
-        }
-        .card__title {
-            color: white;
-            text-shadow: 0 1px 0 black
-        }
+  .card__bookmark--arrow {
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 0 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    width: 0;
+    height: 0;
+  }
 
-        .card__bookmark--button {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            margin: 0;
-
-            .card__feather--bookmark {
-                cursor: pointer;
-
-                &:hover {
-                    fill: red;
-                }
-            }
-        }
-   
+  .card__bookmark--reorder__left {
+    position: absolute;
+    left: 0;
+    top: 45%;
+    margin-left: 0.5rem;
+    cursor: pointer;
+  }
+  .card__bookmark--reorder__right {
+    position: absolute;
+    right: 0;
+    top: 45%;
+    margin-right: 3rem;
+    cursor: pointer;
+  }
 }

@@ -7,7 +7,9 @@ const CharacterCard = ({
   character = {},
   imageSize = "standard_fantastic",
   isBookmarked = false,
-  onBookmarkClick = () => {}
+  onBookmarkClick = () => {},
+  handleMoveLeft = () => {},
+  handleMoveRight = () => {}
 }) => {
   const imageUrl = `${character?.thumbnail?.path}/${imageSize}.${character?.thumbnail?.extension}`;
   return (
@@ -32,6 +34,18 @@ const CharacterCard = ({
         onClick={() => onBookmarkClick(character)}
       >
         <BookmarkIcon isBookmarked={isBookmarked} />
+      </button>
+      <button
+        className="card__bookmark--arrow card__bookmark--reorder__left"
+        onClick={handleMoveLeft}
+      >
+        Move Left
+      </button>
+      <button
+        className="card__bookmark--arrow card__bookmark--reorder__right"
+        onClick={handleMoveRight}
+      >
+        Move Right
       </button>
     </div>
   );

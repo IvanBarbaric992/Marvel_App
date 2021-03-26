@@ -4,7 +4,12 @@ import { CharacterCard } from "components";
 
 import "./CharacterList.scss";
 
-const CharacterList = ({ characters = [], onBookmarkClick = () => {} }) => {
+const CharacterList = ({
+  characters = [],
+  onBookmarkClick,
+  handleMoveLeft,
+  handleMoveRight
+}) => {
   return (
     <section className="cards">
       {characters.map(character => (
@@ -13,6 +18,8 @@ const CharacterList = ({ characters = [], onBookmarkClick = () => {} }) => {
           character={character}
           isBookmarked={character.isBookmarked}
           onBookmarkClick={onBookmarkClick}
+          handleMoveRight={handleMoveRight}
+          handleMoveLeft={handleMoveLeft}
         />
       ))}
     </section>

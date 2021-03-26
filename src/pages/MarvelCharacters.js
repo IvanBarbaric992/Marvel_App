@@ -9,7 +9,6 @@ import {
   getItemFromStorage,
   setItemToStorage
 } from "services/utilities/storage";
-import { removeKey } from "services/utilities/removeKeyFromObject";
 
 const MarvelCharacters = () => {
   const [data, setData] = useState({ characters: [], totalRecords: 0 });
@@ -17,7 +16,7 @@ const MarvelCharacters = () => {
   const [searchField, setSearchField] = useState("");
   const [error, setError] = useState("");
   const [bookmarkedCharacters, setBookmarkedCharacters] = useState(() => {
-    return getItemFromStorage({ key: "@bookmark" }) || {};
+    return getItemFromStorage({ key: "@bookmark" }) || [];
   });
   const dataFromApi = useRef({ characters: [], totalRecords: 0 });
   const [pageData, setPageData] = useState({
@@ -52,18 +51,14 @@ const MarvelCharacters = () => {
 
   useEffect(() => {
     if (!searchField) {
-      dataFromApi.current.characters = Object.keys(bookmarkedCharacters).map(
-        bookmarkId => bookmarkedCharacters[bookmarkId]
-      );
-      dataFromApi.current.totalRecords = Object.keys(
-        bookmarkedCharacters
-      ).length;
+      dataFromApi.current.characters = bookmarkedCharacters;
+      dataFromApi.current.totalRecords = bookmarkedCharacters.length;
     }
     if (!isLoading) {
       setData({
         characters: dataFromApi.current.characters?.map(character => ({
           ...character,
-          isBookmarked: !!bookmarkedCharacters[character.id]
+          isBookmarked: !!bookmarkedCharacters.find(c => c.id === character.id)
         })),
         totalRecords: dataFromApi.current.totalRecords
       });
@@ -93,17 +88,51 @@ const MarvelCharacters = () => {
   };
 
   const onBookmarkClick = character => {
-    if (bookmarkedCharacters[character.id]) {
-      setBookmarkedCharacters(prevState => ({
-        ...removeKey(character.id, prevState)
-      }));
+    if (bookmarkedCharacters.find(c => c.id === character.id)) {
+      setBookmarkedCharacters(prevState =>
+        prevState.filter(x => x.id !== character.id)
+      );
     } else {
-      setBookmarkedCharacters(prevState => ({
-        ...prevState,
-        [character.id]: character
-      }));
+      setBookmarkedCharacters(prevState => [...prevState, character]);
     }
     isBookmarkToggled.current = true;
+  };
+
+  const handleMoveLeft = () => {
+    if (!searchField) {
+      setBookmarkedCharacters([
+        ...bookmarkedCharacters.slice(1),
+        bookmarkedCharacters[0]
+      ]);
+    } else {
+      setData(prevState => {
+        return {
+          ...prevState,
+          characters: [
+            ...prevState.characters.slice(1),
+            prevState.characters[0]
+          ]
+        };
+      });
+    }
+  };
+  const handleMoveRight = () => {
+    if (!searchField) {
+      setBookmarkedCharacters([
+        bookmarkedCharacters[bookmarkedCharacters.length - 1],
+        ...bookmarkedCharacters.slice(0, bookmarkedCharacters.length - 1)
+      ]);
+    } else {
+      setData(prevState => {
+        return {
+          ...prevState,
+          characters: [
+            prevState.characters[prevState.characters.length - 1],
+            ...prevState.characters.slice(0, prevState.characters.length - 1)
+          ]
+        };
+      });
+    }
   };
 
   if (error) {
@@ -119,6 +148,8 @@ const MarvelCharacters = () => {
           <CharacterList
             characters={data.characters}
             onBookmarkClick={onBookmarkClick}
+            handleMoveLeft={handleMoveLeft}
+            handleMoveRight={handleMoveRight}
           />
         </>
       )}
