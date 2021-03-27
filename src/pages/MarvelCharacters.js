@@ -3,8 +3,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CharacterList, Loader, Pagination, SearchBox } from "components";
 
 import useDebounce from "hooks/useDebounce";
-import fetchMarvelCharactersFromApi from "services/api/fetchMarvelCharacters";
 
+import fetchMarvelCharactersFromApi from "services/api/fetchMarvelCharacters";
 import {
   getItemFromStorage,
   setItemToStorage
@@ -97,42 +97,35 @@ const MarvelCharacters = () => {
     }
     isBookmarkToggled.current = true;
   };
+  const handleSwapCharacters = (e, characterId) => {
+    const { id } = e.target;
+    let characterIndex = data.characters.findIndex(c => c.id === characterId);
+    let characterIndexToSwap = 0;
+    if (id === "swap-left") {
+      characterIndexToSwap =
+        characterIndex - 1 === -1
+          ? data.characters.length - 1
+          : characterIndex - 1;
+    } else {
+      characterIndexToSwap =
+        characterIndex + 1 > data.characters.length - 1
+          ? 0
+          : characterIndex + 1;
+    }
 
-  const handleMoveLeft = () => {
-    if (!searchField) {
-      setBookmarkedCharacters([
-        ...bookmarkedCharacters.slice(1),
-        bookmarkedCharacters[0]
-      ]);
-    } else {
-      setData(prevState => {
-        return {
-          ...prevState,
-          characters: [
-            ...prevState.characters.slice(1),
-            prevState.characters[0]
-          ]
-        };
-      });
-    }
-  };
-  const handleMoveRight = () => {
-    if (!searchField) {
-      setBookmarkedCharacters([
-        bookmarkedCharacters[bookmarkedCharacters.length - 1],
-        ...bookmarkedCharacters.slice(0, bookmarkedCharacters.length - 1)
-      ]);
-    } else {
-      setData(prevState => {
-        return {
-          ...prevState,
-          characters: [
-            prevState.characters[prevState.characters.length - 1],
-            ...prevState.characters.slice(0, prevState.characters.length - 1)
-          ]
-        };
-      });
-    }
+    let arr = [...data.characters];
+    arr[characterIndexToSwap] = arr.splice(
+      characterIndex,
+      1,
+      arr[characterIndexToSwap]
+    )[0];
+
+    setData(prevState => {
+      return {
+        ...prevState,
+        characters: [...arr]
+      };
+    });
   };
 
   if (error) {
@@ -148,8 +141,7 @@ const MarvelCharacters = () => {
           <CharacterList
             characters={data.characters}
             onBookmarkClick={onBookmarkClick}
-            handleMoveLeft={handleMoveLeft}
-            handleMoveRight={handleMoveRight}
+            handleSwapCharacters={handleSwapCharacters}
           />
         </>
       )}

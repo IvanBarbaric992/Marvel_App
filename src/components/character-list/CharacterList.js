@@ -7,8 +7,7 @@ import "./CharacterList.scss";
 const CharacterList = ({
   characters = [],
   onBookmarkClick,
-  handleMoveLeft,
-  handleMoveRight
+  handleSwapCharacters
 }) => {
   return (
     <section className="cards">
@@ -18,8 +17,7 @@ const CharacterList = ({
           character={character}
           isBookmarked={character.isBookmarked}
           onBookmarkClick={onBookmarkClick}
-          handleMoveRight={handleMoveRight}
-          handleMoveLeft={handleMoveLeft}
+          handleSwapCharacters={handleSwapCharacters}
         />
       ))}
     </section>
