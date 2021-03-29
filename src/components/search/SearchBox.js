@@ -12,6 +12,7 @@ const SearchBox = ({ onChange }) => {
         className="search__input"
         placeholder="Search characters"
         onChange={onChange}
+        onKeyDown={e => e.key === "Enter" && e.preventDefault()}
       />
     </form>
   );
