@@ -124,9 +124,9 @@ See `package.json` for a complete overview.
 │   │   └── {PageName}.js
 │   ├── services
 │   │   ├── api
-│   │   │    └── {NameOfApiService}.js
+│   │   │    └── {ApiServiceName}.js
 │   │   └── utilities
-│   │   │    └── {NAmeOfFunction}.js
+│   │   │    └── {FunctionName}.js
 │   ├── styles
 │   │    ├── globals
 │   │    ├── mixins
