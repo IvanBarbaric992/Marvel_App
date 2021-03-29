@@ -1,8 +1,8 @@
+import MarvelCharacters from "pages/MarvelCharacters";
+
 import { Layout } from "components";
 
 import "styles/index.scss";
-
-const { default: MarvelCharacters } = require("pages/MarvelCharacters");
 
 const App = () => {
   return (

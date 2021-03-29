@@ -113,17 +113,17 @@ const MarvelCharacters = () => {
           : characterIndex + 1;
     }
 
-    let arr = [...data.characters];
-    arr[characterIndexToSwap] = arr.splice(
+    let characters = [...data.characters];
+    characters[characterIndexToSwap] = characters.splice(
       characterIndex,
       1,
-      arr[characterIndexToSwap]
+      characters[characterIndexToSwap]
     )[0];
 
     setData(prevState => {
       return {
         ...prevState,
-        characters: [...arr]
+        characters: [...characters]
       };
     });
   };
